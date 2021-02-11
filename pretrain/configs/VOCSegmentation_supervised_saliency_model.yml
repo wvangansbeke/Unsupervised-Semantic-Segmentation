@@ -1,0 +1,40 @@
+#
+# Authors: Wouter Van Gansbeke & Simon Vandenhende
+# Licensed under the CC BY-NC 4.0 license (https://creativecommons.org/licenses/by-nc/4.0/)
+
+# Dataset
+train_db_name: VOCSegmentation
+train_db_kwargs:
+   saliency: supervised_model
+num_workers: 8
+train_batch_size: 64
+
+# Model
+backbone: resnet50
+backbone_kwargs:
+   dilated: True
+   pretraining: imagenet_classification 
+model_kwargs:
+   ndim: 32
+   head: linear
+   upsample: True
+   use_classification_head: True
+head: deeplab
+# Freeze block 1 and 2 in backbone (~1% miou improvement)
+freeze_layers: True 
+
+# Optimizer
+epochs: 40
+optimizer: sgd
+optimizer_kwargs:
+   lr: 0.004
+   weight_decay: 0.0001
+   momentum: 0.9
+   nesterov: False
+scheduler: poly
+
+# MoCo
+moco_kwargs:
+   T: 0.5 # Temperature
+   m: 0.999 # Momentum
+   K: 128 # Negatives
