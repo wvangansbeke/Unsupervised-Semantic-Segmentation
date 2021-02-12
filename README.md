@@ -1,7 +1,7 @@
 # Unsupervised Semantic Segmentation by Contrasting Object Mask Proposals
 
 This repo contains the Pytorch implementation of our paper:
-> [**Unsupervised Semantic Segmentation by Contrasting Object Mask Proposals**]()
+> [**Unsupervised Semantic Segmentation by Contrasting Object Mask Proposals**](https://arxiv.org/pdf/2102.06191.pdf)
 >
 > [Wouter Van Gansbeke](https://twitter.com/WGansbeke), [Simon Vandenhende](https://twitter.com/svandenh1), [Stamatios Georgoulis](https://twitter.com/stam_g), and [Luc Van Gool](https://ee.ethz.ch/the-department/faculty/professors/person-detail.OTAyMzM=.TGlzdC80MTEsMTA1ODA0MjU5.html).
 
@@ -151,7 +151,7 @@ If you find this repository useful for your research, please consider citing the
 @article{vangansbeke2020unsupervised,
   title={Unsupervised Semantic Segmentation by Contrasting Object Mask Proposals},
   author={Van Gansbeke, Wouter and Vandenhende, Simon and Georgoulis, Stamatios and Van Gool, Luc},
-  journal={arxiv preprint arxiv:ID},
+  journal={arxiv preprint arxiv:2102.06191},
   year={2021}
 }
 @inproceedings{vangansbeke2020scan,
