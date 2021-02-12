@@ -169,6 +169,8 @@ If you find this repository useful for your research, please consider citing the
 ```
 For any enquiries, please contact the main authors.
 
+For an overview on self-supervised learning, have a look at the [overview repository](https://github.com/wvangansbeke/Self-Supervised-Learning-Overview).
+
 ## License
 
 This software is released under a creative commons license which allows for personal and research use only. For a commercial license please contact the authors. You can view a license summary [here](http://creativecommons.org/licenses/by-nc/4.0/).
