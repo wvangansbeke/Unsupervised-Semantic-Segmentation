@@ -143,7 +143,7 @@ To evaluate and visualize the predictions of the finetuned model, run the follow
 cd segmentation
 python eval.py --config_env configs/env.yml --config_exp configs/VOCSegmentation_supervised_saliency_model.yml --state-dict $PATH_TO_MODEL
 ```
-You can optionally append the `--crf-postprocess` flagg. 
+You can optionally append the `--crf-postprocess` flag. 
 
 ## Citation
 This code is based on the [SCAN](https://github.com/wvangansbeke/Unsupervised-Classification) and [MoCo](https://github.com/facebookresearch/moco) repositories.
