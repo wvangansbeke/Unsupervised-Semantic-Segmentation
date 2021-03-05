@@ -98,7 +98,7 @@ The feature representations are clustered with K-means. If the pixel embeddings 
 
 ```shell
 cd segmentation
-python kmeans.py --config_env configs/env.yml --config_exp configs/kmeans/kmeans_VOCSegmentation_supervised_saliency_model.yml
+python kmeans.py --config_env configs/env.yml --config_exp configs/kmeans/kmeans_VOCSegmentation_supervised_saliency.yml
 ```
 Remarks: Note that we perform the complete K-means fitting on the validation set to save memory and that the reported results were averaged over 5 different runs. 
 You should get the following results (21 clusters):
