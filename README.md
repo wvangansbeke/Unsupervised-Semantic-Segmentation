@@ -14,8 +14,11 @@ This repo contains the Pytorch implementation of our paper:
 ## Contents
 1. [Introduction](#introduction)
 0. [Installation](#installation)
-0. [Training](#training)
+0. [Training](#training-maskcontrast)
 0. [Evaluation](#evaluation)
+    - [Linear Classifier](#linear-classifier-lc)
+    - [Clustering](#clustering-k-means)
+    - [Semantic Segment Retrieval](#semantic-segment-retrieval)
 0. [Model Zoo](#model-zoo)
 0. [Citation](#citation)
 
@@ -126,6 +129,23 @@ IoU class train is 69.90
 IoU class tvmonitor is 27.56
 ```
 
+### Semantic Segment Retrieval
+We examine our representations on PASCAL through segment retrieval. First, we compute a feature vector for every object mask in the `val` set by averaging the pixel embeddings within the predicted mask. Next, we retrieve the nearest neighbors on the `train_aug` set for each object.
+
+```shell
+cd segmentation
+python retrieval.py --config_env configs/env.yml --config_exp configs/retrieval/retrieval_VOCSegmentation_unsupervised_saliency.yml
+```
+
+| Method                    | MIoU (7 classes) | MIoU (21 classes)|
+| ------------------------- | ---------------- | ---------------- |
+| MoCo v2                   | 48.0             | 39.0             |
+| MaskContrast* (unsup sal.)| 53.4             | 43.3             |
+| MaskContrast* (sup sal.)  | 62.3             | 49.6             |
+
+_\* Denotes MoCo init._
+
+
 ## Model Zoo
 Download the pretrained and linear finetuned models here.
 
@@ -145,21 +165,6 @@ python eval.py --config_env configs/env.yml --config_exp configs/VOCSegmentation
 ```
 You can optionally append the `--crf-postprocess` flag. 
 
-## Semantic Segment Retrieval
-We examine our representations on PASCAL through segment retrieval. First, we compute a feature vector for every object mask in the `val` set by averaging the pixel embeddings within the predicted mask. Next, we retrieve the nearest neighbors on the `train_aug` set for each object.
-
-```shell
-cd segmentation
-python retrieval.py --config_env configs/env.yml --config_exp configs/retrieval/retrieval_VOCSegmentation_unsupervised_saliency.yml
-```
-
-| Method                    | MIoU (7 classes) | MIoU (21 classes)|
-| ------------------------- | ---------------- | ---------------- |
-| MoCo v2                   | 48.0             | 39.0             |
-| MaskContrast* (unsup sal.)| 53.4             | 43.3             |
-| MaskContrast* (sup sal.)  | 62.3             | 49.6             |
-
-_\* Denotes MoCo init._
 
 ## Citation
 This code is based on the [SCAN](https://github.com/wvangansbeke/Unsupervised-Classification) and [MoCo](https://github.com/facebookresearch/moco) repositories.
