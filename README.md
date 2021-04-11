@@ -5,7 +5,7 @@ This repo contains the Pytorch implementation of our paper:
 >
 > [Wouter Van Gansbeke](https://twitter.com/WGansbeke), [Simon Vandenhende](https://twitter.com/svandenh1), [Stamatios Georgoulis](https://twitter.com/stam_g), and [Luc Van Gool](https://ee.ethz.ch/the-department/faculty/professors/person-detail.OTAyMzM=.TGlzdC80MTEsMTA1ODA0MjU5.html).
 
-🏆 __SOTA for unsupervised semantic segmentation. Check out the [Papers-with-code](https://paperswithcode.com/paper/unsupervised-semantic-segmentation-by) website for [Unsupervised Semantic Segmentation](https://paperswithcode.com/sota/unsupervised-semantic-segmentation-on-pascal-1?p=unsupervised-semantic-segmentation-by) benchmark for more details.__
+🏆 __SOTA for unsupervised semantic segmentation. Check out [Papers With Code](https://paperswithcode.com/paper/unsupervised-semantic-segmentation-by) for the [Unsupervised Semantic Segmentation](https://paperswithcode.com/sota/unsupervised-semantic-segmentation-on-pascal-1?p=unsupervised-semantic-segmentation-by) benchmark and more details.__
 <p align="left">
     <img src="images/teaser.png" width="600"/>
 
@@ -144,6 +144,22 @@ cd segmentation
 python eval.py --config_env configs/env.yml --config_exp configs/VOCSegmentation_supervised_saliency_model.yml --state-dict $PATH_TO_MODEL
 ```
 You can optionally append the `--crf-postprocess` flag. 
+
+## Semantic Segment Retrieval
+We examine our representations on PASCAL through segment retrieval. First, we compute a feature vector for every object mask in the `val` set by averaging the pixel embeddings within the predicted mask. Next, we retrieve the nearest neighbors on the `train_aug` set for each object.
+
+```shell
+cd segmentation
+python retrieval.py --config_env configs/env.yml --config_exp configs/retrieval/retrieval_VOCSegmentation_unsupervised_saliency.yml
+```
+
+| Method                    | MIoU (7 classes) | MIoU (21 classes)|
+| ------------------------- | ---------------- | ---------------- |
+| MoCo v2                   | 48.0             | 39.0             |
+| MaskContrast* (unsup sal.)| 53.4             | 43.3             |
+| MaskContrast* (sup sal.)  | 62.3             | 49.6             |
+
+_\* Denotes MoCo init._
 
 ## Citation
 This code is based on the [SCAN](https://github.com/wvangansbeke/Unsupervised-Classification) and [MoCo](https://github.com/facebookresearch/moco) repositories.

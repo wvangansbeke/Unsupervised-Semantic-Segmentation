@@ -1,0 +1,24 @@
+# Dataset
+train_db_name: VOCSegmentation
+val_db_name: VOCSegmentation
+val_db_kwargs:
+  batch_size: 10
+num_workers: 4
+
+# Model
+backbone: 'resnet50'
+backbone_kwargs:
+   dilated: True
+   pretrained: True
+model_kwargs:
+   ndim: 32
+   head: linear
+   upsample: True
+   use_classification_head: True
+head: 'deeplab'
+freeze_layer: 'none'
+pretraining: /path/to/unsupervised_model.pth.tar # Change this.
+kmeans_eval: True
+
+retrieval_kwargs:
+   ignore_classes: []

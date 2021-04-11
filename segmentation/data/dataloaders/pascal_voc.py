@@ -33,7 +33,7 @@ class VOC12(data.Dataset):
                           'pottedplant', 'sheep', 'sofa', 'train', 'tvmonitor']
 
     def __init__(self, root=Path.db_root_dir('VOCSegmentation'),
-                 split='val', transform=None, download=True):
+                 split='val', transform=None, download=True, ignore_classes=[]):
         # Set paths
         self.root = root
         valid_splits = ['trainaug', 'train', 'val']
@@ -80,6 +80,10 @@ class VOC12(data.Dataset):
         # Display stats
         print('Number of dataset images: {:d}'.format(len(self.images)))
 
+        # List of classes which are remapped to ignore index.
+        # This option is used for comparing with other works that consider only a subset of the pascal classes.
+        self.ignore_classes = [self.VOC_CATEGORY_NAMES.index(class_name) for class_name in ignore_classes]
+
     def __getitem__(self, index):
         sample = {}
 
@@ -111,6 +115,9 @@ class VOC12(data.Dataset):
 
     def _load_semseg(self, index):
         _semseg = np.array(Image.open(self.semsegs[index]))
+
+        for ignore_class in self.ignore_classes:
+            _semseg[_semseg == ignore_class] = 255
         return _semseg
 
     def get_img_size(self, idx=0):

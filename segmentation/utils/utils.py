@@ -51,10 +51,11 @@ class SemsegMeter(object):
         eval_result['jaccards_all_categs'] = jac
         eval_result['mIoU'] = np.mean(jac)
 
-        print('Evaluation of semantic segmentation ')
-        print('mIoU is %.2f' %(100*eval_result['mIoU']))
-        for i_part in range(self.num_classes):
-            print('IoU class %s is %.2f' %(self.class_names[i_part], 100*jac[i_part]))
+        if verbose:
+            print('Evaluation of semantic segmentation ')
+            print('mIoU is %.2f' %(100*eval_result['mIoU']))
+            for i_part in range(self.num_classes):
+                print('IoU class %s is %.2f' %(self.class_names[i_part], 100*jac[i_part]))
 
         return eval_result
 
