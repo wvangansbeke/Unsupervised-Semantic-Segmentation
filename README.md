@@ -14,7 +14,9 @@ This repo contains the Pytorch implementation of our paper:
 ## Contents
 1. [Introduction](#introduction)
 0. [Installation](#installation)
-0. [Training](#training-maskcontrast)
+0. [Training MaskContrast](#training-maskcontrast)
+    - [Setup](#setup)
+    - [Train](#pre-train-model)
 0. [Evaluation](#evaluation)
     - [Linear Classifier](#linear-classifier-lc)
     - [Clustering](#clustering-k-means)
@@ -161,7 +163,7 @@ _\* Denotes CRF post-processing._
 To evaluate and visualize the predictions of the finetuned model, run the following command:
 ```shell
 cd segmentation
-python eval.py --config_env configs/env.yml --config_exp configs/VOCSegmentation_supervised_saliency_model.yml --state-dict $PATH_TO_MODEL
+python eval.py --config_env configs/env.yml --config_exp configs/linear_finetune/linear_finetune_VOCSegmentation_supervised_saliency.yml --state-dict $PATH_TO_MODEL
 ```
 You can optionally append the `--crf-postprocess` flag. 
 
