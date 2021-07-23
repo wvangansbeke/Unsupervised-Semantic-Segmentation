@@ -5,7 +5,9 @@ This repo contains the Pytorch implementation of our paper:
 >
 > [Wouter Van Gansbeke](https://twitter.com/WGansbeke), [Simon Vandenhende](https://twitter.com/svandenh1), [Stamatios Georgoulis](https://twitter.com/stam_g), and [Luc Van Gool](https://ee.ethz.ch/the-department/faculty/professors/person-detail.OTAyMzM=.TGlzdC80MTEsMTA1ODA0MjU5.html).
 
-🏆 __SOTA for unsupervised semantic segmentation. Check out [Papers With Code](https://paperswithcode.com/paper/unsupervised-semantic-segmentation-by) for the [Unsupervised Semantic Segmentation](https://paperswithcode.com/sota/unsupervised-semantic-segmentation-on-pascal-1?p=unsupervised-semantic-segmentation-by) benchmark and more details.__
+- __Accepted at ICCV 2021 ([Slides]()).__
+- 🏆 __SOTA for unsupervised semantic segmentation.__ 
+- __Check out [Papers With Code](https://paperswithcode.com/paper/unsupervised-semantic-segmentation-by) for the [Unsupervised Semantic Segmentation](https://paperswithcode.com/sota/unsupervised-semantic-segmentation-on-pascal-1?p=unsupervised-semantic-segmentation-by) benchmark and more details.__
 <p align="left">
     <img src="images/teaser.png" width="600"/>
 
