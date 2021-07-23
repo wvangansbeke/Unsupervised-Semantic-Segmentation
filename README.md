@@ -175,16 +175,16 @@ This code is based on the [SCAN](https://github.com/wvangansbeke/Unsupervised-Cl
 If you find this repository useful for your research, please consider citing the following paper(s):
 
 ```bibtex
-@article{vangansbeke2020unsupervised,
+@inproceedings{vangansbeke2020unsupervised,
   title={Unsupervised Semantic Segmentation by Contrasting Object Mask Proposals},
   author={Van Gansbeke, Wouter and Vandenhende, Simon and Georgoulis, Stamatios and Van Gool, Luc},
-  journal={arxiv preprint arxiv:2102.06191},
+  booktitle={International Conference on Computer Vision},
   year={2021}
 }
 @inproceedings{vangansbeke2020scan,
   title={Scan: Learning to classify images without labels},
   author={Van Gansbeke, Wouter and Vandenhende, Simon and Georgoulis, Stamatios and Proesmans, Marc and Van Gool, Luc},
-  booktitle={Proceedings of the European Conference on Computer Vision},
+  booktitle={European Conference on Computer Vision},
   year={2020}
 }
 @inproceedings{he2019moco,
