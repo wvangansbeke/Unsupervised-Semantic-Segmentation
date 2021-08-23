@@ -31,7 +31,7 @@ Being able to learn dense semantic representations of images without supervision
 Additionally, we argue about the importance of having a prior that contains information about objects, or their parts, and discuss several possibilities to obtain such a prior in an unsupervised manner. In particular, we adopt a mid-level visual prior to group pixels together and contrast the obtained object mask porposals. For this reason we name the method __MaskContrast__. 
 
 ## Installation
-The Python code runs with recent Pytorch versions, e.g. 1.4. 
+The Python code is compatible with Pytorch version 1.4 (version 1.5 should work as well).
 Assuming [Anaconda](https://docs.anaconda.com/anaconda/install/), the most important packages can be installed as:
 ```shell
 conda install pytorch=1.4.0 torchvision=0.5.0 cudatoolkit=10.0 -c pytorch
