@@ -4,13 +4,13 @@ The following file describes two options for computing saliency masks. These for
 The two options are as follows:
 - __Option 1__: Use a supervised saliency detector. 
 - __Option 2__: Use an unsupervised saliency detector.
-We describe how to compute saliency masks in both cases. Note that we apply some postprocessing afterwards. 
 
+We describe how to compute the saliency masks in both cases. Note that a postprocessing step is included. 
 
 ## Option 1: Supervised saliency
 
-You simply use a pretrained supervised saliency model to compute the saliency masks directly on the target dataset.
-We used the publicly available code from [BASNet](https://github.com/xuebinqin/BASNet).
+In this case, we simply use an available supervised saliency model to compute the saliency masks directly on the target dataset.
+For our paper, we used the publicly available code from [BASNet](https://github.com/xuebinqin/BASNet).
 
 ```bibtex
 @inproceedings{qin2019basnet,
@@ -24,10 +24,12 @@ We used the publicly available code from [BASNet](https://github.com/xuebinqin/B
 
 ## Option 2: Unsupervised saliency
 
-When using unsupervised saliency, we need to go with a slightly more complex method to get robust results.
-We adopt a two-step approach. In the first step, we use an existing unsupervised model to compute saliency masks on a publicly available saliency dataset.
-We use the [DeepUSPS](https://github.com/sally20921/DeepUSPS) model. Note that the saliency datasets are more simpler in nature compared to segmentation datasets.
-This allows to get high-quality masks, even with an unsupervised model. 
+We go with a slightly more complex approach when using unsupervised saliency. 
+The strategy consists of two steps. 
+In the first step, we use an unsupervised model to compute saliency masks on a publicly available saliency dataset.
+We use the [DeepUSPS](https://github.com/sally20921/DeepUSPS) model. 
+Note that the saliency datasets are more simpler in nature compared to segmentation datasets.
+This allows to get high-quality masks even with an unsupervised model. 
 In the second step, we use the obtained masks as pseudo ground-truth to train the BASNet model. 
 The BASNet model is then used to compute saliency masks on the target dataset. 
 We empirically found that this gave better results, compared to directly using the unsupervised model.
@@ -46,7 +48,8 @@ It seems that the BASNet architecture transfers better to new datasets compared 
 
 ## Postprocessing
 
-The model predictions are post-processed as follows:
+The model predictions are post-processed using the method below.
+This ensures that we do not have an image with many small segments. 
 
 ```python
 import cv2
@@ -69,13 +72,13 @@ def postprocess(model_output: np.array) -> np.array:
 	
 	# Throw out small segments
 	for contour in contours:
-	    segment_mask = np.zeros(mask.shape[0], mask.shape[1], dtype=np.uint8)
+	    segment_mask = np.zeros((mask.shape[0], mask.shape[1]), dtype=np.uint8)
 	    segment_mask = cv2.drawContours(mask, [contour], 0, 255, thickness=cv2.FILLED)
 	    area = (np.sum(segment_mask) / 255.0) / np.prod(segment_mask.shape)
             if area < 0.01:
 		mask[segment_mask == 255] = 0
 
-	# Raise error if too small
+	# If area of mask is too small, return None
 	if np.sum(mask) / np.prod(mask) < 0.01:
 	    return None
 
