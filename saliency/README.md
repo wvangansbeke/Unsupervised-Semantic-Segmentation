@@ -33,7 +33,7 @@ In the second step, we use the obtained masks as pseudo ground-truth to train th
 The BASNet model is then used to compute saliency masks on the target dataset. 
 We empirically found that this gave better results, compared to directly using the unsupervised model.
 It seems that the BASNet architecture transfers better to new datasets compared to the model from DeepUSPS.
-The weights of our BASNet model are publiclcy avaible on [google drive](https://drive.google.com/file/d/14qsoXU-NE63jKzuGPTJd8DRDnpnP4w6j/view?usp=sharing).
+The weights of our BASNet model are publicly avaible on [google drive](https://drive.google.com/file/d/14qsoXU-NE63jKzuGPTJd8DRDnpnP4w6j/view?usp=sharing).
 
 ```bibtex
 @inproceedings{nguyen2019deepusps,
