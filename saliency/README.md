@@ -9,8 +9,8 @@ We describe how to compute the saliency masks in both cases. Note that a postpro
 
 ## Option 1: Supervised saliency
 
-In this case, we simply use an available supervised saliency model to compute the saliency masks directly on the target dataset.
-For our paper, we used the publicly available code from [BASNet](https://github.com/xuebinqin/BASNet).
+In this case, we simply use a saliency model pretrained in a supervised way to compute the saliency masks directly on the target dataset.
+For our paper, we used the publicly available model from [BASNet](https://github.com/xuebinqin/BASNet).
 
 ```bibtex
 @inproceedings{qin2019basnet,
@@ -24,9 +24,8 @@ For our paper, we used the publicly available code from [BASNet](https://github.
 
 ## Option 2: Unsupervised saliency
 
-We go with a slightly more complex approach when using unsupervised saliency. 
-The strategy consists of two steps. 
-In the first step, we use an unsupervised model to compute saliency masks on a publicly available saliency dataset.
+In this case, we do not use any datasets with annotated saliency masks.
+We adopt a two-step strategy. In the first step, we use an unsupervised saliecny estimator to compute saliency masks on a publicly available saliency dataset.
 We use the [DeepUSPS](https://github.com/sally20921/DeepUSPS) model. 
 Note that the saliency datasets are more simpler in nature compared to segmentation datasets.
 This allows to get high-quality masks even with an unsupervised model. 
@@ -34,7 +33,7 @@ In the second step, we use the obtained masks as pseudo ground-truth to train th
 The BASNet model is then used to compute saliency masks on the target dataset. 
 We empirically found that this gave better results, compared to directly using the unsupervised model.
 It seems that the BASNet architecture transfers better to new datasets compared to the model from DeepUSPS.
-
+The weights of our BASNet model are publiclcy avaible on [google drive](https://drive.google.com/file/d/14qsoXU-NE63jKzuGPTJd8DRDnpnP4w6j/view?usp=sharing).
 
 ```bibtex
 @inproceedings{nguyen2019deepusps,
@@ -73,13 +72,13 @@ def postprocess(model_output: np.array) -> np.array:
 	# Throw out small segments
 	for contour in contours:
 	    segment_mask = np.zeros((mask.shape[0], mask.shape[1]), dtype=np.uint8)
-	    segment_mask = cv2.drawContours(mask, [contour], 0, 255, thickness=cv2.FILLED)
+	    segment_mask = cv2.drawContours(segment_mask, [contour], 0, 255, thickness=cv2.FILLED)
 	    area = (np.sum(segment_mask) / 255.0) / np.prod(segment_mask.shape)
             if area < 0.01:
 		mask[segment_mask == 255] = 0
 
 	# If area of mask is too small, return None
-	if np.sum(mask) / np.prod(mask) < 0.01:
+	if np.sum(mask) / np.prod(mask.shape) < 0.01:
 	    return None
 
 	return mask
