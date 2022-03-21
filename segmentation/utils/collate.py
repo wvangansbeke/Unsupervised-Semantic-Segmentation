@@ -5,7 +5,8 @@
 import torch
 import numpy as np
 import collections
-from torch._six import string_classes, int_classes
+from torch._six import string_classes
+int_classes = (bool, int)
 
 
 def collate_custom(batch):
