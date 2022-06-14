@@ -8,6 +8,7 @@ This repo contains the Pytorch implementation of our paper:
 - __Accepted at ICCV 2021 ([Slides](https://wvangansbeke.github.io/pdfs/unsupervised_segmentation.pdf)).__
 - 🏆 __SOTA for unsupervised semantic segmentation.__ 
 - __Check out [Papers With Code](https://paperswithcode.com/paper/unsupervised-semantic-segmentation-by) for the [Unsupervised Semantic Segmentation](https://paperswithcode.com/sota/unsupervised-semantic-segmentation-on-pascal-1?p=unsupervised-semantic-segmentation-by) benchmark and more details.__
+- __Check out our follow-up work [MaskDistill](https://github.com/wvangansbeke/MaskDistill) with improvements upto +11\% mIoU on PASCAL VOC__. 
 <p align="left">
     <img src="images/teaser.png" width="600"/>
 
